@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inversor de Texto</title>
+    <style>
+        /* Estilos generales */
+        body {
+            background: #121212;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #00e0ff;
+        }
+
+        /* Campo de entrada */
+        input[type="text"] {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            font-size: 16px;
+            outline: none;
+            background: #2c2c2c;
+            color: #f0f0f0;
+            box-shadow: 0 0 5px #00e0ff55;
+            margin-bottom: 10px;
+        }
+
+        /* Botón */
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00e0ff;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: none;
+        }
+
+        button:hover {
+            background-color: #00b8d4;
+        }
+
+        /* Resultado */
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #00ff99;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>🔁 Inversor de Texto en Vivo</h2>
+
+    <!-- Entrada de texto -->
+    <input type="text" id="textInput" placeholder="Escribe al menos 4 letras..." />
+
+    <!-- Botón para invertir (solo visible si hay más de 3 letras) -->
+    <button id="reverseBtn">Invertir texto</button>
+
+    <!-- Resultado -->
+    <div id="result"></div>
+
+    <script>
+        const input = document.getElementById("textInput");
+        const button = document.getElementById("reverseBtn");
+        const result = document.getElementById("result");
+
+        // Función para invertir un string
+        function reverseString(str) {
+            return str.split("").reverse().join("");
+        }
+
+        // Mostrar u ocultar el botón según el texto
+        input.addEventListener("input", () => {
+            const text = input.value;
+            if (text.length > 3) {
+                button.style.display = "inline-block";
+            } else {
+                button.style.display = "none";
+                result.textContent = "";
+            }
+        });
+
+        // Acción al hacer clic en el botón
+        button.addEventListener("click", () => {
+            const reversed = reverseString(input.value);
+            result.textContent = `Texto invertido: ${reversed}`;
+        });
+
+        // 🎯 OPCIONAL: invertir automáticamente en tiempo real
+        // Descomenta lo siguiente para usar la inversión automática (sin botón)
+
+        /*
+        input.addEventListener("input", () => {
+          const text = input.value;
+          if (text.length > 3) {
+            result.textContent = `Texto invertido: ${reverseString(text)}`;
+          } else {
+            result.textContent = "";
+          }
+        });
+        button.style.display = "none"; // Oculta el botón si activas esta opción
+        */
+    </script>
+
+</body>
+
+</html>
